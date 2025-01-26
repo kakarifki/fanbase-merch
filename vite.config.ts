@@ -9,6 +9,10 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  server: {
+    port: 5173, // Port yang digunakan Vite
+    open: true, // Buka browser otomatis
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
