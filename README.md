@@ -1,8 +1,11 @@
 # E-commece Merchendise Fanbase JKT48
+[https://fanbase-merch.vercel.app/](https://fanbase-merch.vercel.app/)
 
 ## Backend 
-Backend dapat diakses di   
-Repository Backend 
+Backend dapat diakses di [https://fanbase-merch-backend.onrender.com](https://fanbase-merch-backend.onrender.com)  
+Repository Backend [https://github.com/kakarifki/fanbase-merch-backend](https://github.com/kakarifki/fanbase-merch-backend)  
+
+
 ## Ide
 Idenya adalah mengumpulkan list merch fanbase member JKT48  
 jadi 1 tempat buat nyari dan beli  
@@ -37,6 +40,7 @@ ada 2 role,
 tidak login = cuma lihat lihat
 
 ## Deployment
-Ketika selesai, project akan menggunakan domain saya pribadi.   
-Sepertinya front end akan di deploy via vercel,   
-back endnya akan dideploy ke render.com
+Ketika selesai, project akan menggunakan domain saya pribadi.  
+Front end sudah berhasil deploy via vercel,    
+Back end sudah berhasil deploy ke render.com
+Databasennya sudah berhasil deploy ke neon.tech
