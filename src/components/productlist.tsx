@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Product } from '../types/product';
-import ProductCard from '@/components/productcard'
+import ProductCard from '@/components/ProductCard'
 
 const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);
