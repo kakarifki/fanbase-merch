@@ -1,4 +1,8 @@
 # E-commece Merchendise Fanbase JKT48
+
+## Backend 
+Backend dapat diakses di   
+Repository Backend 
 ## Ide
 Idenya adalah mengumpulkan list merch fanbase member JKT48  
 jadi 1 tempat buat nyari dan beli  
