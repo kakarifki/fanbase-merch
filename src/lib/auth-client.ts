@@ -1,7 +1,7 @@
 // src/lib/auth-client.ts
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/auth'; // Ganti dengan URL backend kamu
+const API_URL = import.meta.env.VITE_API_URL; // Ganti dengan URL backend kamu
 
 export const signUp = async (data: {
   username: string;
