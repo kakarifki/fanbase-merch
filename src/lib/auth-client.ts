@@ -10,7 +10,7 @@ export const signUp = async (data: {
   password: string;
 }) => {
   try {
-    const response = await axios.post(`${API_URL}/register`, data);
+    const response = await axios.post(`${API_URL}/auth/register`, data);
     return { data: response.data, error: null };
   } catch (error: any) {
     return { data: null, error: error.response?.data || { message: 'Failed to sign up' } };
@@ -19,7 +19,7 @@ export const signUp = async (data: {
 
 export const signIn = async (data: { email: string; password: string }) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, data);
+    const response = await axios.post(`${API_URL}/auth/login`, data);
     // Simpan token di localStorage atau cookie
     localStorage.setItem('token', response.data.token);
     return { data: response.data, error: null };
