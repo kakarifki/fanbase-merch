@@ -57,7 +57,7 @@ const LoginForm = () => {
         toast({ // Use showToast
           description: "Login successful!",
         })
-        navigate("/product")
+        navigate("/profile")
       }
     } catch (error: any) {
       console.error("Error during login:", error);

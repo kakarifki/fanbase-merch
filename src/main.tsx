@@ -15,6 +15,7 @@ import LoginForm from './components/LoginForm';
 // import UserDashboard from './components/UserDashboard';
 import ProductList from './components/productlist';
 import { Toaster } from './components/ui/toaster';
+import Profile from './components/Profile';
 
 
 const router = createBrowserRouter([
@@ -39,10 +40,10 @@ const router = createBrowserRouter([
         path: "/product",
         element: <ProductList />,
       },
-      // {
-      //   path: "/about",
-      //   element: <About />,
-      // },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
       // {
       //   path: "/faq",
       //   element: <Faq />,
