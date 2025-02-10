@@ -1,18 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { Product } from '../types/product';
 import ProductCard from '@/components/ProductCard';
+import { fetchProducts } from '@/services/api';
 
-// fungsi fetch products
-const fetchProducts = async (): Promise<Product[]> => {
-  try {
-    const response = await axios.get<Product[]>(`${import.meta.env.VITE_API_URL}/products`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    throw error; // Penting untuk re-throw error agar React Query tahu ada kesalahan
-  }
-};
+
 
 const ProductList = () => {
   const { data: products, isLoading, isError, error } = useQuery<Product[], Error>({
