@@ -1,18 +1,11 @@
-// main.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './styles/index.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import About from './pages/about';
-// import Faq from './pages/faq';
-// import ErrorPage from "./pages/error-page";
-// import TaskDetail from './pages/task-detail';
-// import NewTask from './pages/new-task';
-// import { TaskProvider } from './context/task-context';
+
 import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
-// import UserDashboard from './components/UserDashboard';
 import ProductList from './components/productlist';
 import { Toaster } from './components/ui/toaster';
 import Profile from './components/Profile';
@@ -20,6 +13,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import HomePage from './components/home';
 
 // Create a client
 const queryClient = new QueryClient()
@@ -28,8 +22,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // errorElement: <ErrorPage />,
+    // errorElement: <ErrorPage />, belom dibikin
     children: [
+      {
+        index: true, 
+        element: <HomePage />, // Render HomePage di route utama
+      },
       {
         path: "/register",
         element: <RegisterForm />,
