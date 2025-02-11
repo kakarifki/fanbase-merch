@@ -1,9 +1,8 @@
+// src/components/ProductList.tsx
 import { useQuery } from '@tanstack/react-query';
 import { Product } from '../types/product';
 import ProductCard from '@/components/ProductCard';
 import { fetchProducts } from '@/services/api';
-
-
 
 const ProductList = () => {
   const { data: products, isLoading, isError, error } = useQuery<Product[], Error>({
@@ -26,6 +25,7 @@ const ProductList = () => {
         {products?.map((product) => (
           <ProductCard
             key={product.code}
+            code={product.code} // id props
             name={product.name}
             imageUrl={product.imageUrl || ''}
             price={product.price}

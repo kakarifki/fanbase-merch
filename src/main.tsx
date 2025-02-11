@@ -14,6 +14,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import HomePage from './components/home';
+import ProductDetailPage from './components/ProductDetailPage';
 
 // Create a client
 const queryClient = new QueryClient()
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         path: "/product",
         element: <ProductList />,
       },
+      {
+        path: "/product/:id", // Route product details
+        element: <ProductDetailPage />,
+     },
       {
         path: "/profile",
         element: <Profile />,
