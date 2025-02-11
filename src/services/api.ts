@@ -2,6 +2,11 @@ import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL; // Ambil base URL dari environment variable
 
+// Fungsi untuk mendapatkan token dari localStorage
+const getToken = () => {
+  return localStorage.getItem('token'); // Ganti 'token' dengan key yang kamu gunakan
+};
+
 // Fungsi untuk mengambil daftar product
 export const fetchProducts = async () => {
   try {
@@ -21,5 +26,25 @@ export const fetchProductDetail = async (code: string) => {
   } catch (error) {
     console.error(`Error fetching product with ID ${code}:`, error);
     throw error;
+  }
+};
+
+// Fungsi untuk menambahkan product ke cart
+export const addToCart = async (code: string, quantity: number = 1) => {
+  try {
+      const token = getToken();
+      const response = await axios.post(
+          `${API_BASE_URL}/cart/items`,
+          { code, quantity },
+          {
+              headers: {
+                  Authorization: `Bearer ${token}`, // Tambahkan header Authorization
+              },
+          }
+      );
+      return response.data;
+  } catch (error: any) {
+      console.error(`Error adding product with code ${code} to cart:`, error);
+      throw error;
   }
 };
