@@ -9,7 +9,7 @@ const Profile = () => {
   }
 
   if (isError) {
-    return <p>Error: {error.message}</p>;
+    return <p>Error: {error?.message}</p>;
   }
 
   if (!profileData) {
