@@ -2,6 +2,18 @@ import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL; // Ambil base URL dari environment variable
 
+export interface CartItem {
+  id: string;
+  product: {
+      id: string;
+      name: string;
+      imageUrl: string;
+      price: number;
+  };
+  quantity: number;
+}
+
+
 // Fungsi untuk mendapatkan token dari localStorage
 const getToken = () => {
   return localStorage.getItem('token'); // Ganti 'token' dengan key yang kamu gunakan
@@ -43,8 +55,24 @@ export const addToCart = async (code: string, quantity: number = 1) => {
           }
       );
       return response.data;
-  } catch (error: any) {
+  } catch (error) {
       console.error(`Error adding product with code ${code} to cart:`, error);
+      throw error;
+  }
+};
+
+// Fungsi untuk mengambil cart items
+export const fetchCartItems = async (): Promise<CartItem[]> => {
+  try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get<CartItem[]>(`${API_BASE_URL}/cart`, {
+          headers: {
+              Authorization: `Bearer ${token}`,
+          },
+      });
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching cart items:', error);
       throw error;
   }
 };

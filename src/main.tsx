@@ -15,6 +15,7 @@ import {
 } from '@tanstack/react-query'
 import HomePage from './components/home';
 import ProductDetailPage from './components/ProductDetailPage';
+import CartPage from './components/CartPage';
 
 // Create a client
 const queryClient = new QueryClient()
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/cart", // Route Cart
+        element: <CartPage />,
       },
       // {
       //   path: "/faq",
