@@ -36,6 +36,9 @@ const Navbar = () => {
           <Link to="/product" className="text-gray-600 hover:text-gray-800">
             Product
           </Link>
+          <Link to="/about" className="text-gray-600 hover:text-gray-800">
+            About
+          </Link>
           {/* search bar */}
           <form onSubmit={handleSubmit}>
             <Input

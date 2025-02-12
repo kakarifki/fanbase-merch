@@ -16,6 +16,7 @@ import {
 import HomePage from './components/home';
 import ProductDetailPage from './components/ProductDetailPage';
 import CartPage from './components/CartPage';
+import AboutPage from './components/AboutPage';
 
 // Create a client
 const queryClient = new QueryClient()
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "/cart", // Route Cart
         element: <CartPage />,
+      },
+      {
+        path: "/about", // about page
+        element: <AboutPage />,
       },
       // {
       //   path: "/faq",

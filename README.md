@@ -1,5 +1,5 @@
 # E-commece Merchendise Fanbase JKT48
-[https://fanbase-merch.vercel.app/](https://fanbase-merch.vercel.app/)
+[https://jkt48-fanbase-merch.rifkiseptiawan.com/](https://jkt48-fanbase-merch.rifkiseptiawan.com/)
 
 ## Backend 
 Backend dapat diakses di [https://fanbase-merch-backend.onrender.com](https://fanbase-merch-backend.onrender.com)  
