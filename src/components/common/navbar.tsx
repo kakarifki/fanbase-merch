@@ -1,7 +1,25 @@
-import { Link } from 'react-router-dom'; // Menggunakan react-router-dom
-import { Input } from "@/components/ui/input"
+// src/components/Navbar.tsx
+import { Link, useNavigate } from 'react-router-dom';
+import { Input } from "@/components/ui/input";
+import { useState } from 'react';
 
 const Navbar = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (searchTerm.trim() !== '') {
+      navigate(`/product?search=${searchTerm}`); // Redirect ke halaman product dengan keyword pencarian
+    } else {
+      navigate('/product'); // Redirect ke halaman product tanpa keyword jika kosong
+    }
+  };
+
   return (
     <nav className="bg-white shadow-md py-4">
       <div className="container mx-auto flex items-center justify-between">
@@ -18,7 +36,16 @@ const Navbar = () => {
           <Link to="/product" className="text-gray-600 hover:text-gray-800">
             Product
           </Link>
-          <Input type="search" placeholder="Search" className="max-w-sm" />
+          {/* search bar */}
+          <form onSubmit={handleSubmit}>
+            <Input
+              type="search"
+              placeholder="Search"
+              className="max-w-sm"
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+          </form>
         </div>
 
         {/* Login/Register */}
