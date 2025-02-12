@@ -1,6 +1,5 @@
-// components/LoginForm.tsx
 import { useState } from 'react';
-import { authClient } from '@/lib/auth-client'; // Import authClient
+import { authClient } from '@/lib/auth-client';
 import {
   Form,
   FormControl,
@@ -15,7 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -30,10 +29,8 @@ const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  // Ambil URL halaman sebelumnya atau default ke "/profile"
-  const from = location.state?.from?.pathname || "/profile";
+  const [searchParams] = useSearchParams(); // Ambil query params dari URL
+  const from = searchParams.get("from") || "/profile"; //  Gunakan "/profile" jika "from" tidak ada
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,10 +55,10 @@ const LoginForm = () => {
           description: error.message,
         });
       } else {
-        toast({ description: "Login successful!" });
-
-        // Setelah login, arahkan ke halaman yang diminta sebelum login
-        navigate(from, { replace: true });
+        toast({
+          description: "Login successful!",
+        });
+        navigate(from); // Arahkan ke halaman sebelum login
       }
     } catch (error: any) {
       console.error("Error during login:", error);
