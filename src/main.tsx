@@ -17,19 +17,19 @@ import HomePage from './components/home';
 import ProductDetailPage from './components/ProductDetailPage';
 import CartPage from './components/CartPage';
 import AboutPage from './components/AboutPage';
+import { authLoader } from "./lib/auth-loader"; // 🔹 Gunakan authLoader dari file terpisah
 
 // Create a client
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // errorElement: <ErrorPage />, belom dibikin
     children: [
       {
         index: true, 
-        element: <HomePage />, // Render HomePage di route utama
+        element: <HomePage />,
       },
       {
         path: "/register",
@@ -39,42 +39,28 @@ const router = createBrowserRouter([
         path: "/login",
         element: <LoginForm />,
       },
-      // {
-      //   path: "/dashboard",
-      //   element: <UserDashboard />,
-      // },
       {
         path: "/product",
         element: <ProductList />,
       },
       {
-        path: "/product/:id", // Route product details
+        path: "/product/:id",
         element: <ProductDetailPage />,
-     },
+      },
       {
         path: "/profile",
         element: <Profile />,
+        loader: authLoader, // 
       },
       {
-        path: "/cart", // Route Cart
+        path: "/cart",
         element: <CartPage />,
+        loader: authLoader, //
       },
       {
-        path: "/about", // about page
+        path: "/about",
         element: <AboutPage />,
       },
-      // {
-      //   path: "/faq",
-      //   element: <Faq />,
-      // },
-      // {
-      //   path: "/task/:id",
-      //   element: <TaskDetail />,
-      // },
-      // {
-      //   path: "/new-task",
-      //   element: <NewTask />,
-      // },
     ]
   },
 ]);
@@ -82,8 +68,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <Toaster />
-        </QueryClientProvider>
+      <RouterProvider router={router} />
+      <Toaster />
+    </QueryClientProvider>
   </React.StrictMode>
 );

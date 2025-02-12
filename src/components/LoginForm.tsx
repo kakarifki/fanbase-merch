@@ -8,14 +8,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { useNavigate } from "react-router-dom";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -24,12 +24,16 @@ const formSchema = z.object({
   password: z.string().min(8, {
     message: "Password must be at least 8 characters.",
   }),
-})
+});
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast() // Use showToast
+  const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Ambil URL halaman sebelumnya atau default ke "/profile"
+  const from = location.state?.from?.pathname || "/profile";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -37,35 +41,35 @@ const LoginForm = () => {
       email: "",
       password: "",
     },
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
-      const { error } = await authClient.signIn({ // Use authClient.signIn
+      const { error } = await authClient.signIn({
         email: values.email,
         password: values.password,
       });
 
       if (error) {
-        toast({ // Use showToast
+        toast({
           variant: "destructive",
           title: "Login failed.",
           description: error.message,
-        })
+        });
       } else {
-        toast({ // Use showToast
-          description: "Login successful!",
-        })
-        navigate("/profile")
+        toast({ description: "Login successful!" });
+
+        // Setelah login, arahkan ke halaman yang diminta sebelum login
+        navigate(from, { replace: true });
       }
     } catch (error: any) {
       console.error("Error during login:", error);
-      toast({ // Use showToast
-          variant: "destructive",
-          title: "Error",
-          description: error.message,
-        })
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error.message,
+      });
     } finally {
       setIsLoading(false);
     }

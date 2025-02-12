@@ -92,7 +92,10 @@ const AboutPage = () => {
         <h2 className="text-xl font-semibold mb-2">Links</h2>
         <ul className="list-disc list-inside">
             <li>
-              <strong>Frontend:</strong> <a href="https://fanbase-merch.vercel.app/" target="_blank" rel="noopener noreferrer">https://fanbase-merch.vercel.app/</a>
+              <strong>Frontend:</strong> <a href="https://jkt48-fanbase-merch.rifkiseptiawan.com" target="_blank" rel="noopener noreferrer">https://jkt48-fanbase-merch.rifkiseptiawan.com</a>
+              <li>
+                <strong>Frontend Repository:</strong> <a href="https://github.com/kakarifki/fanbase-merch-backend" target="_blank" rel="noopener noreferrer">https://github.com/kakarifki/fanbase-merch-backend</a>
+              </li>
             </li>
             <li>
               <strong>Backend:</strong> <a href="https://fanbase-merch-backend.onrender.com/" target="_blank" rel="noopener noreferrer">https://fanbase-merch-backend.onrender.com/</a>
