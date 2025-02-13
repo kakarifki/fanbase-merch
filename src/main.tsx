@@ -18,6 +18,7 @@ import ProductDetailPage from './components/ProductDetailPage';
 import CartPage from './components/CartPage';
 import AboutPage from './components/AboutPage';
 import { authLoader } from "./lib/auth-loader"; // 🔹 Gunakan authLoader dari file terpisah
+import CheckoutSuccess from './components/CheckOut';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
         path: "/cart",
         element: <CartPage />,
         loader: authLoader, //
+      },
+      {
+        path: "/checkout-success",
+        element: <CheckoutSuccess />,
       },
       {
         path: "/about",
