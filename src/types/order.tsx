@@ -30,6 +30,6 @@ export interface Order {
     productId: string;
     quantity: number;
     price: number;
-    // product: Product;
+    product: Product;
   }
   
