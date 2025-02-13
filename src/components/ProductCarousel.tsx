@@ -21,7 +21,7 @@ const ProductCarousel = ({ slides }: Props) => {
     return (
         <Carousel
             orientation="horizontal"
-            className="w-full max-w-md"
+            className="w-full"
             plugins={[
                 Autoplay({
                   delay: 2000,
@@ -31,17 +31,17 @@ const ProductCarousel = ({ slides }: Props) => {
         >
             <CarouselContent className="w-full pb-5">
                 {slides.slice(0, 5).map((slide, index) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 px-4">
                         <Link to={`/product/${slide.code}`}>
                         <div className="p-1">
                             <AspectRatio ratio={1 / 1} className="h-72">
                                 <img
                                     src={slide.imageUrl}
                                     alt={slide.name}
-                                    // className="aspect-square h-full w-full rounded-md object-cover shadow-sm"
+                                    className="aspect-square h-full w-full rounded-md object-cover shadow-md"
                                 />
                             </AspectRatio>
-                            <p className="text-sm mt-2">{slide.name}</p>
+                            <p className="text-sm mt-2 text-center">{slide.name}</p>
                         </div>
                         </Link>
                     </CarouselItem>

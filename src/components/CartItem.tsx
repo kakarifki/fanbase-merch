@@ -1,5 +1,7 @@
 // components/CartItemComponent.tsx
+import React from 'react';
 import { CartItem } from '@/services/api';
+import { Trash2 } from 'lucide-react';
 
 interface CartItemComponentProps {
   item: CartItem;
@@ -7,22 +9,34 @@ interface CartItemComponentProps {
 }
 
 const CartItemComponent: React.FC<CartItemComponentProps> = ({ item, onDelete }) => {
+  // Format price in IDR
+  const formattedPrice = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(item.product.price * item.quantity);
+
   return (
-    <div className="flex items-center border-b py-2">
-      <img
-        src={item.product.imageUrl}
-        alt={item.product.name}
-        className="w-20 h-20 object-cover mr-4"
-      />
+    <div className="flex items-center border-b border-gray-200 py-4 hover:bg-gray-50 transition-colors duration-300">
+      <div className="flex-shrink-0 mr-4">
+        <img
+          src={item.product.imageUrl}
+          alt={item.product.name}
+          className="w-24 h-24 object-cover rounded-md shadow-sm"
+        />
+      </div>
+      <div className="flex-grow">
+        <h2 className="text-lg font-semibold text-gray-800 mb-1">{item.product.name}</h2>
+        <p className="text-gray-600 mb-1">Quantity: {item.quantity}</p>
+        <p className="text-primary font-bold">{formattedPrice}</p>
+      </div>
       <div>
-        <h2 className="text-lg font-semibold">{item.product.name}</h2>
-        <p>Price: ${item.product.price}</p>
-        <p>Quantity: {item.quantity}</p>
         <button
           onClick={() => onDelete(item.product.id)}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded mt-2"
+          className="text-red-500 hover:text-red-700 p-2 rounded-full hover:bg-red-50 transition-colors"
         >
-          Delete
+          <Trash2 className="w-5 h-5" />
         </button>
       </div>
     </div>

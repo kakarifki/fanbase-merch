@@ -25,11 +25,13 @@ const Home = () => {
       ) : (
         <p>No Featured Product</p>
       )}
-      <Link to='/product'>
-      <Button>
-        Show all Merch
-      </Button>
-      </Link>
+      <div className="text-center mt-8">
+        <Link to='/product'>
+          <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md">
+            Show all Merch
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };

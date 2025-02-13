@@ -2,8 +2,8 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 py-4 text-center">
-      <p className="text-gray-500">
+    <footer className="bg-blue-900 py-4 text-center shadow-md">
+      <p className="text-white">
         &copy; {new Date().getFullYear()} Fanbase Merch. All rights reserved.
       </p>
     </footer>

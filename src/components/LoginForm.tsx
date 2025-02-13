@@ -77,57 +77,64 @@ const LoginForm = () => {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn@example.com" {...field} type="email" disabled={isLoading} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input placeholder="Password" {...field} type="password" disabled={isLoading} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" disabled={isLoading}>
-          {isLoading && (
-            <svg
-              className="mr-2 h-4 w-4 animate-spin"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 2v2M12 20v2M5.07 5.07 6.5 6.5M17.5 17.5 18.93 18.93M2 12h2M20 12h2M5.07 18.93 6.5 17.5M17.5 6.5 18.93 5.07" />
-            </svg>
-          )}
-          Login
-        </Button>
+    <div className="container flex items-center justify-center">
+      <div className="w-full max-w-md">
+        <div className="bg-white rounded-lg shadow-md p-8">
+          <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn@example.com" {...field} type="email" disabled={isLoading} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Password" {...field} type="password" disabled={isLoading} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" disabled={isLoading} className="w-full">
+                {isLoading && (
+                  <svg
+                    className="mr-2 h-4 w-4 animate-spin"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 2v2M12 20v2M5.07 5.07 6.5 6.5M17.5 17.5 18.93 18.93M2 12h2M20 12h2M5.07 18.93 6.5 17.5M17.5 6.5 18.93 5.07" />
+                  </svg>
+                )}
+                Login
+              </Button>
 
-        {/* Tambahkan tautan ke register page */}
-        <p className="text-sm mt-2">
-          Don't have an account? <Link to="/register" className="text-blue-500 hover:underline">Register here</Link>
-        </p>
-      </form>
-    </Form>
+              {/* Tambahkan tautan ke register page */}
+              <p className="text-sm mt-2 text-center">
+                Don't have an account? <Link to="/register" className="text-blue-500 hover:underline">Register here</Link>
+              </p>
+            </form>
+          </Form>
+        </div>
+      </div>
+    </div>
   );
 };
 
