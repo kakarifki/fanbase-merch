@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProductDetail, addToCart } from '@/services/api'; // Import addToCart
+import { useToast } from '@/hooks/use-toast';
 
 const ProductDetailPage = () => {
   const { id: code } = useParams<{ id: string }>();
+  const { toast } = useToast()
 
   const { data: product, isLoading, isError, error } = useQuery({
     queryKey: ['product', code],
@@ -21,6 +23,9 @@ const ProductDetailPage = () => {
 
       // Berhasil ditambahkan ke cart
       console.log('Product added to cart!');
+      toast({
+        title: "Product added to cart!",
+      });
       // Mungkin tampilkan pesan sukses ke user
     } catch (error: any) {
       console.error('Error adding to cart:', error.message);
