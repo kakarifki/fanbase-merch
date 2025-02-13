@@ -10,6 +10,9 @@ const CheckoutSuccess = () => {
   const [order, setOrder] = useState<Order | null>(null)
   const [searchParams] = useSearchParams()
   const orderId = searchParams.get('orderId')
+  const formatToRupiah = (amount: number) => {
+    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+};
 
   const { data, isLoading, isError } = useQuery<Order | null>({
     queryKey: ['order', orderId],
@@ -38,13 +41,13 @@ const CheckoutSuccess = () => {
           {order.orderItems.map((item) => (
             <li key={item.id} className="border-b py-2">
               <p className="font-medium">{item.product.name}</p>
-              <p>Qty: {item.quantity} - Price: ${item.price}</p>
+              <p>Qty: {item.quantity} - Total: {formatToRupiah(item.price)}</p>
             </li>
           ))}
         </ul>
 
         <div className="mt-4">
-          <p className="font-bold">Total Harga: ${order.totalPrice}</p>
+          <p className="font-bold">Total Harga: {formatToRupiah(order.totalPrice)}</p>
           <p>Status Pembayaran: <span className="text-blue-600">{order.status}</span></p>
         </div>
       </div>
