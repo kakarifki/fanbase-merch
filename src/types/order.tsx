@@ -13,3 +13,23 @@ export interface Order {
     }[]
   }
   
+
+  export interface Order {
+    id: string;
+    userId: string;
+    totalPrice: number;
+    status: string;
+    createdAt: Date;
+    orderItems: OrderItem[];
+  }
+  
+  export interface OrderItem {
+    id: string;
+    code: string;
+    orderId: string;
+    productId: string;
+    quantity: number;
+    price: number;
+    // product: Product;
+  }
+  
