@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, ShoppingCart } from 'lucide-react';
+import { 
+  // Heart, 
+  ShoppingCart } from 'lucide-react';
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -28,13 +30,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ code, name, imageUrl, price }
                     alt={name} 
                     className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                 />
-                <Button 
+                {/* <Button 
                     variant="ghost" 
                     size="icon" 
                     className="absolute top-2 right-2 bg-white/70 rounded-full hover:bg-white/90"
-                >
-                    <Heart className="w-5 h-5 text-red-500" />
-                </Button>
+                > */}
+                    {/* <Heart className="w-5 h-5 text-red-500" /> */}
+                {/* </Button> */}
+                
             </div>
             
             <CardContent className="p-4 space-y-2">
