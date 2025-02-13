@@ -30,6 +30,9 @@ export interface Order {
     productId: string;
     quantity: number;
     price: number;
-    product: Product;
-  }
+    product: {
+              id: string;
+              name: string;
+          };
+        }
   
