@@ -1,29 +1,26 @@
+// src/store/auth.ts
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 
-// Tipe data untuk auth store
 interface AuthState {
   token: string | null;
   setToken: (token: string | null) => void;
-  logout: () => void;
+  logout: () => void; // ✅ Tambahkan logout function
 }
 
-// Membuat store Zustand dengan middleware `persist`
-const useAuthStore = create<AuthState>()(
-  persist(
-    (set) => ({
-      token: null,
-      setToken: (newToken: string | null) => {
-        set({ token: newToken });
-      },
-      logout: () => {
-        set({ token: null });
-      },
-    }),
-    {
-      name: 'auth-storage', // Nama penyimpanan di localStorage
+const useAuthStore = create<AuthState>((set) => ({
+  token: localStorage.getItem('token') || null,
+  setToken: (token) => {
+    if (token) {
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('token');
     }
-  )
-);
+    set({ token });
+  },
+  logout: () => { // ✅ Implementasi logout
+    localStorage.removeItem('token'); // Hapus token di localStorage
+    set({ token: null }); // Hapus token di Zustand
+  },
+}));
 
 export default useAuthStore;

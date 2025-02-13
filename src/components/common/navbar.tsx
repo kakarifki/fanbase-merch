@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useToast } from '@/hooks/use-toast';
 import useProfile  from '@/hooks/use-profile';
 import useCart from '@/hooks/use-cart.ts';
 import useAuthStore from '@/store/auth'; // ✅ Zustand untuk global state
@@ -8,23 +9,32 @@ import { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { toast} = useToast()
   const [searchTerm, setSearchTerm] = useState('');
 
-  // ✅ Gunakan Zustand untuk ambil token
-  const { token } = useAuthStore();
+  // token zustand
+  const { token, logout } = useAuthStore();
 
-  // ✅ Panggil hooks di luar kondisi
+  const handleLogout = () => {
+    logout(); // ✅ Hapus token
+    toast({
+      description: "Log Out successful!",
+    });
+    navigate("/login"); // ✅ Redirect ke halaman login
+  };
+
+  // Hooks
   const { profileData, refetch } = useProfile();
   const { cartItems } = useCart();
 
-// ✅ Gunakan useEffect untuk update profile setelah login
+// use effect biar refresh
 useEffect(() => {
   if (token) {
     refetch(); // Panggil ulang data profil setelah login
   }
 }, [token, refetch]);
 
-  // ✅ Pastikan data tidak error jika belum login
+  // Error handling
   const userName = token ? profileData?.name ?? 'Loading...' : '';
   const totalItems = token ? cartItems?.length ?? 0 : 0;
 
@@ -69,6 +79,9 @@ useEffect(() => {
             <Link to="/cart" className="relative">
               🛒 <span className="text-sm bg-red-500 text-white px-2 rounded-full">{totalItems}</span>
             </Link>
+            <Button variant="destructive" onClick={handleLogout}>
+            Logout
+          </Button>
           </>
         )}
       </div>
