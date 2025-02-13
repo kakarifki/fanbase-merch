@@ -5,6 +5,7 @@ import { useToast } from '@/hooks/use-toast';
 import useProfile  from '@/hooks/use-profile';
 import useCart from '@/hooks/use-cart.ts';
 import useAuthStore from '@/store/auth'; // ✅ Zustand untuk global state
+// import useCartStore from '@/store/cart';
 import { useState, useEffect } from 'react';
 
 const Navbar = () => {
@@ -14,6 +15,9 @@ const Navbar = () => {
 
   // token zustand
   const { token, logout } = useAuthStore();
+
+  // Ambil cart dari Zustand
+  // const cartItems = useCartStore((state) => state.cartItems);
 
   const handleLogout = () => {
     logout(); // ✅ Hapus token
@@ -33,6 +37,10 @@ const Navbar = () => {
       refetch(); // Panggil ulang data profil setelah login
     }
   }, [token, refetch]);
+
+  useEffect(() => {
+    // Ini akan trigger re-render ketika cartItems berubah
+  }, [cartItems]);
 
   // Error handling
   const userName = token ? profileData?.name ?? 'Loading...' : '';
