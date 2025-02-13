@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { useNavigate } from 'react-router-dom';
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -34,6 +35,7 @@ const formSchema = z.object({
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast()
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,7 +66,8 @@ const RegisterForm = () => {
       } else {
         toast({
           title: "Sign-up successful!",
-        })
+        });
+        navigate('/login'); // Redirect ke /login setelah sukses
       }
     } catch (error: any) {
       console.error("Error during registration:", error);

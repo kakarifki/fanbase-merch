@@ -14,7 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import useAuthStore from '@/store/auth'; // ✅ Import Zustand Store
 
 const formSchema = z.object({
@@ -121,6 +121,11 @@ const LoginForm = () => {
           )}
           Login
         </Button>
+
+        {/* Tambahkan tautan ke register page */}
+        <p className="text-sm mt-2">
+          Don't have an account? <Link to="/register" className="text-blue-500 hover:underline">Register here</Link>
+        </p>
       </form>
     </Form>
   );
