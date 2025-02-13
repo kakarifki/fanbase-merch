@@ -1,6 +1,6 @@
 // src/pages/ProductDetailPage.tsx
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProductDetail, addToCart } from '@/services/api';
 import { useToast } from '@/hooks/use-toast';
@@ -9,6 +9,7 @@ import { Heart, ShoppingCart, Minus, Plus } from 'lucide-react';
 const ProductDetailPage = () => {
   const { id: code } = useParams<{ id: string }>();
   const { toast } = useToast()
+  const navigate = useNavigate()
 
   const { data: product, isLoading, isError, error } = useQuery({
     queryKey: ['product', code],
@@ -34,6 +35,7 @@ const ProductDetailPage = () => {
         title: "Sorry",
         description: "Please Login First",
       })
+      navigate("/login")
 
       console.error('Error adding to cart:', errorMessage);
     }

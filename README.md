@@ -1,46 +1,37 @@
-# E-commece Merchendise Fanbase JKT48
+# E-commerce Merchandise Fanbase JKT48 (Frontend)
+
 [https://jkt48-fanbase-merch.rifkiseptiawan.com/](https://jkt48-fanbase-merch.rifkiseptiawan.com/)
 
-## Backend 
-Backend dapat diakses di [https://fanbase-merch-backend.onrender.com](https://fanbase-merch-backend.onrender.com)  
-Repository Backend [https://github.com/kakarifki/fanbase-merch-backend](https://github.com/kakarifki/fanbase-merch-backend)  
+## Deskripsi Proyek
+Ini adalah bagian frontend dari platform e-commerce merchandise fanbase JKT48 yang memungkinkan pengguna untuk menjelajahi dan membeli merchandise JKT48. Platform ini terintegrasi dengan backend untuk fitur autentikasi pengguna, pengelolaan keranjang belanja, dan pemesanan produk.
 
-
-## Ide
-Idenya adalah mengumpulkan list merch fanbase member JKT48  
-jadi 1 tempat buat nyari dan beli  
-(dan mungkin ini jatohnya cuma liat liat sih, kalo payment ya hubungi fanbasenya)
-
-## Project Stack
-sebuah project Fullstack.
-ada front endnya, 
-- bun
-- vite
-- react
-- tailwind  
+## Stack Teknologi
+Proyek ini menggunakan stack teknologi modern berikut untuk frontend:
+- **Bun** 
+- **Vite** 
+- **React** 
+- **Tailwind CSS** 
+- **React Router** 
+- **React Query** 
+- **Shadcn UI & HyperUI**
   
-ada backendnya, 
-- bun
-- hono openAPI
-- prisma
-  
-ada Database APInya,
-- Postgres
-
 ## Fitur
-Fitur utamanya
-- Register
-- Login
-- cart
+Beberapa fitur utama yang tersedia pada frontend:
+- **Registrasi dan Login**: Pengguna dapat mendaftar dan masuk ke platform.
+- **Lihat Produk**: Pengguna dapat menjelajahi produk merchandise yang tersedia.
+- **Detail Produk**: Pengguna dapat melihat detail dari produk yang dipilih.
+- **Keranjang Belanja**: Pengguna dapat menambahkan produk ke keranjang belanja dan melanjutkan ke checkout.
+- **Profil Pengguna**: Pengguna dapat melihat dan mengedit profil mereka.
+- **Riwayat Pemesanan**: Pengguna dapat melihat status dan detail pesanan sebelumnya.
 
-## Role User
-ada 2 role, 
-- user = bisa lihat lihat, bisa add to cart 
-- admin = bisa add product
-tidak login = cuma lihat lihat
+## Role Pengguna
+Ada dua peran utama dalam sistem:
+- **User**: Pengguna dapat melihat produk dan menambahkannya ke keranjang belanja.
+- **Admin**: Admin dapat menambah produk ke sistem (fitur ini hanya dapat diakses setelah login sebagai admin).
 
 ## Deployment
-Ketika selesai, project akan menggunakan domain saya pribadi.  
-Front end sudah berhasil deploy via vercel,    
-Back end sudah berhasil deploy ke render.com
-Databasennya sudah berhasil deploy ke neon.tech
+Frontend aplikasi ini telah dideploy menggunakan Vercel dan dapat diakses di https://jkt48-fanbase-merch.rifkiseptiawan.com/.
+
+# Backend
+Backend dapat diakses di https://fanbase-merch-backend.onrender.com  
+Repository Backend: https://github.com/kakarifki/fanbase-merch-backend
