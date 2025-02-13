@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { fetchCartItems, CartItem, checkoutOrder } from '@/services/api'; // Pastikan fungsi checkoutOrder diimport
-// import { Link } from 'react-router-dom';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { fetchCartItems, CartItem, checkoutOrder, removeFromCart } from '@/services/api'; // Pastikan fungsi checkoutOrder diimport
+import CartItemComponent from '@/components/CartItem';
 
 const CartPage = () => {
     const navigate = useNavigate();
+    const queryClient = useQueryClient(); // Initialize QueryClient utk invalidate query
 
     // Mengambil data cart
     const { data: cartItems, isLoading, isError, error } = useQuery({
@@ -26,6 +27,22 @@ const CartPage = () => {
         return cartItems.reduce((total: number, item: CartItem) => total + item.product.price * item.quantity, 0);
     };
 
+// Mutasi untuk delete cart item
+const deleteCartItemMutation = useMutation({
+    mutationFn: async (productId: string) => {
+      await removeFromCart(productId); // Panggil fungsi removeFromCart
+    },
+    onSuccess: () => {
+      // Invalidate query cart setelah delete berhasil
+      queryClient.invalidateQueries({ queryKey: ['cart'] });
+    },
+  });
+
+    // Fungsi untuk menghapus item dari cart
+  const handleDeleteCartItem = (productId: string) => {
+    deleteCartItemMutation.mutate(productId);
+  };
+
     const totalPrice = calculateTotalPrice();
 
     if (isLoading) {
@@ -43,23 +60,16 @@ const CartPage = () => {
                 <p>Your cart is empty.</p>
             ) : (
                 <div>
-                    {/* Product List */}
-                    <div className="mb-4">
-                        {cartItems?.map((item) => (
-                            <div key={item.id} className="flex items-center border-b py-2">
-                                <img
-                                    src={item.product.imageUrl}
-                                    alt={item.product.name}
-                                    className="w-20 h-20 object-cover mr-4"
-                                />
-                                <div>
-                                    <h2 className="text-lg font-semibold">{item.product.name}</h2>
-                                    <p>Price: ${item.product.price}</p>
-                                    <p>Quantity: {item.quantity}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+          {/* Product List */}
+          <div className="mb-4">
+            {cartItems?.map((item) => (
+              <CartItemComponent
+                key={item.id}
+                item={item}
+                onDelete={handleDeleteCartItem} // kirim fungsi delete ke CartItemComponent
+              />
+            ))}
+          </div>
 
                     {/* Total Price */}
                     <div className="mb-4">

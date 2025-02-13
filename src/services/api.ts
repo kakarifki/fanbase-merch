@@ -72,7 +72,7 @@ export const fetchCartItems = async (): Promise<CartItem[]> => {
           },
       });
       return response.data;
-  } catch (error) {a
+  } catch (error) {
       console.error('Error fetching cart items:', error);
       throw error;
   }
@@ -88,3 +88,19 @@ export const checkoutOrder = async (): Promise<Order> => {
 
   return res.data
 }
+
+// Fungsi untuk menghapus product dari cart (DELETE request)
+export const removeFromCart = async (productId: string) => {
+  try {
+      const token = getToken();
+      await axios.delete(`${API_BASE_URL}/cart/items`, {  // Ubah Ke /cart/items
+          headers: {
+              Authorization: `Bearer ${token}`,
+          },
+          data: { productId }  // Kirim productId di request body
+      });
+  } catch (error) {
+      console.error(`Error removing product with id ${productId} from cart:`, error);
+      throw error;
+  }
+};
