@@ -24,7 +24,7 @@ const useProfile = () => {
     },
   });
 
-  return { profileData: data, isLoading, isError, error, refetch }; // ✅ Tambahkan refetch
-};
+  return { profileData: data, isLoading, isError, error, refetch }; // Tambahkan refetch untuk zustand
+}; 
 
 export default useProfile;

@@ -18,7 +18,6 @@ export const signUp = async (data: {
 
 export const signIn = async (data: { email: string; password: string }) => {
   try {
-    console.log("signIn called with:", data); // Tambahkan ini
     const response = await axios.post(`${API_URL}/auth/login`, data);
     console.log("signIn response:", response); // Tambahkan ini
     // Simpan token di localStorage atau cookie
