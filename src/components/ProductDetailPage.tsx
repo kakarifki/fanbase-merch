@@ -28,6 +28,12 @@ const ProductDetailPage = () => {
       });
       // Mungkin tampilkan pesan sukses ke user
     } catch (error: any) {
+      toast({
+          variant: "destructive",
+          title: "Sorry",
+          description: "Please Login First",
+        })
+
       console.error('Error adding to cart:', error.message);
       // Tampilkan pesan error ke user
     }

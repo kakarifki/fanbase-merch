@@ -17,8 +17,10 @@ import HomePage from './components/home';
 import ProductDetailPage from './components/ProductDetailPage';
 import CartPage from './components/CartPage';
 import AboutPage from './components/AboutPage';
-import { authLoader } from "./lib/auth-loader"; // 🔹 Gunakan authLoader dari file terpisah
+import { authLoader } from "./lib/auth-loader"; //  Gunakan authLoader dari file terpisah
 import CheckoutSuccess from './components/CheckOut';
+import OrderPage from './components/OrderPage';
+import OrderDetailPage from './components/OrderDetailPage';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -66,6 +68,18 @@ const router = createBrowserRouter([
         path: "/about",
         element: <AboutPage />,
       },
+      {
+
+      path: "/orders", 
+        element: <OrderPage />,
+        loader: authLoader,
+      },
+      {
+        path: "/orders/:orderId",
+        element: <OrderDetailPage />,
+        loader: authLoader,
+      },
+      
     ]
   },
 ]);
