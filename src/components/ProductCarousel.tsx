@@ -4,9 +4,11 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
 import Autoplay from "embla-carousel-autoplay"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Product } from '@/types/product';
+import { Link } from "react-router";
 
 interface Props {
     slides: Product[]
+
 }
 
 const ProductCarousel = ({ slides }: Props) => {
@@ -30,6 +32,7 @@ const ProductCarousel = ({ slides }: Props) => {
             <CarouselContent className="w-full pb-5">
                 {slides.slice(0, 5).map((slide, index) => (
                     <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                        <Link to={`/product/${slide.code}`}>
                         <div className="p-1">
                             <AspectRatio ratio={1 / 1} className="h-72">
                                 <img
@@ -40,6 +43,7 @@ const ProductCarousel = ({ slides }: Props) => {
                             </AspectRatio>
                             <p className="text-sm mt-2">{slide.name}</p>
                         </div>
+                        </Link>
                     </CarouselItem>
                 ))}
             </CarouselContent>
