@@ -3,7 +3,17 @@
 import { useParams, Link} from 'react-router-dom';
 import { useOrder } from '@/hooks/use-order';
 import { Button } from './ui/button';
-// import { Order } from '@/types/order';
+import { OrderItem } from '@/types/order';
+
+// interface OrderItem {
+//     id: string;
+//     quantity: number;
+//     price: number;
+//     product: {
+//         id: string;
+//         name: string;
+//     };
+// }
 
 const OrderDetailPage = () => {
     const { orderId } = useParams();
@@ -27,7 +37,7 @@ const OrderDetailPage = () => {
             <div className="bg-white shadow-md rounded-lg p-4">
                 <h2 className="text-lg font-semibold mb-3">Order Items</h2>
                 <ul>
-                    {order.orderItems.map((item) => (
+                    {order.orderItems.map((item: OrderItem) => (
                         <li key={item.id} className="border-b py-2">
                             <p className="font-medium">{item.product.name}</p>
                             <p>Qty: {item.quantity} - Price: ${item.price}</p>
