@@ -2,6 +2,7 @@ export interface Order {
     id: string
     totalPrice: number
     status: string
+    createdAt: Date;
     orderItems: {
       id: string
       quantity: number
