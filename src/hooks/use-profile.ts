@@ -1,28 +1,30 @@
-// src/hooks/useProfile.ts
+// src/hooks/use-profile.ts
 import { useQuery } from '@tanstack/react-query';
-import { getProfile } from '@/lib/auth-client'; // Import getProfile dari authClient
+import { getProfile } from '@/lib/auth-client';
 
 interface ProfileData {
   id: string;
   username: string;
   email: string;
   name: string;
-  // tambahin data profile 
 }
 
 const useProfile = () => {
-  const { data: profileData, isLoading, isError, error } = useQuery<ProfileData, Error>({
+  const { data, isLoading, isError, error, refetch } = useQuery<ProfileData | null, Error>({
     queryKey: ['profile'],
     queryFn: async () => {
       const { data, error } = await getProfile();
       if (error) {
-        throw new Error(error.message); 
+        throw new Error(error.message);
       }
-      return data!;
+      if (!data) {
+        throw new Error('Profile data is null');
+      }
+      return data;
     },
   });
 
-  return { profileData, isLoading, isError, error };
+  return { profileData: data, isLoading, isError, error, refetch }; // ✅ Tambahkan refetch
 };
 
 export default useProfile;

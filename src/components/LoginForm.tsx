@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import useAuthStore from '@/store/auth'; // ✅ Import Zustand Store
 
 const formSchema = z.object({
   email: z.string().email({
@@ -29,8 +30,10 @@ const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams(); // Ambil query params dari URL
-  const from = searchParams.get("from") || "/profile"; //  Gunakan "/profile" jika "from" tidak ada
+  const [searchParams] = useSearchParams();
+  const from = searchParams.get("from") || "/profile";
+
+  const setToken = useAuthStore((state) => state.setToken); // ✅ Gunakan Zustand untuk menyimpan token
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,30 +46,31 @@ const LoginForm = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
-      const { error } = await authClient.signIn({
+      const result = await authClient.signIn({
         email: values.email,
         password: values.password,
       });
 
-      if (error) {
+      if (result.error) {
         toast({
           variant: "destructive",
           title: "Login failed.",
-          description: error.message,
+          description: result.error.message,
         });
-      } else {
+      } else if (result.data?.token) {
+        setToken(result.data.token); // ✅ Simpan token ke Zustand
         toast({
           description: "Login successful!",
         });
         navigate(from); // Arahkan ke halaman sebelum login
-      }
-    } catch (error: any) {
-      console.error("Error during login:", error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: error.message,
-      });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Unexpected error",
+          description: "Token is missing from the response.",
+        });
+      };
+
     } finally {
       setIsLoading(false);
     }
