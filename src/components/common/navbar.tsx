@@ -7,6 +7,7 @@ import useCart from '@/hooks/use-cart.ts';
 import useAuthStore from '@/store/auth'; // ✅ Zustand untuk global state
 // import useCartStore from '@/store/cart';
 import { useState, useEffect } from 'react';
+import LogoutButton from '@/components/ui/button-logout';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -98,9 +99,7 @@ const Navbar = () => {
               </Link>
 
               {/* Logout Button */}
-              <Button variant="destructive" onClick={handleLogout} className="bg-red-500 hover:bg-red-600 transition">
-                Logout
-              </Button>
+              <LogoutButton onClick={handleLogout} />
             </>
           )}
         </div>
